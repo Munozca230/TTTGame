@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="481.0" prefWidth="377.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ttt.TTTController">
+   <children>
+      <Pane prefHeight="497.0" prefWidth="377.0" style="-fx-background-color: #FAFAFA;">
+         <children>
+            <Pane layoutX="34.0" layoutY="134.0" prefHeight="310.0" prefWidth="310.0" style="-fx-background-color: #494949;">
+               <children>
+                  <Button fx:id="button1" focusTraversable="false" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" textAlignment="CENTER">
+                     <font>
+                        <Font name="Ebrima" size="46.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="button2" focusTraversable="false" layoutX="105.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0">
+                     <font>
+                        <Font name="Ebrima" size="46.0" />
+                     </font></Button>
+                  <Button fx:id="button3" focusTraversable="false" layoutX="210.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0">
+                     <font>
+                        <Font name="Ebrima" size="46.0" />
+                     </font></Button>
+                  <Button fx:id="button4" focusTraversable="false" layoutY="105.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0">
+                     <font>
+                        <Font name="Ebrima" size="46.0" />
+                     </font></Button>
+                  <Button fx:id="button6" focusTraversable="false" layoutX="210.0" layoutY="105.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0">
+                     <font>
+                        <Font name="Ebrima" size="46.0" />
+                     </font></Button>
+                  <Button fx:id="button5" focusTraversable="false" layoutX="105.0" layoutY="105.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0">
+                     <font>
+                        <Font name="Ebrima" size="46.0" />
+                     </font></Button>
+                  <Button fx:id="button7" focusTraversable="false" layoutY="210.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0">
+                     <font>
+                        <Font name="Ebrima" size="46.0" />
+                     </font></Button>
+                  <Button fx:id="button9" focusTraversable="false" layoutX="210.0" layoutY="210.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0">
+                     <font>
+                        <Font name="Ebrima" size="46.0" />
+                     </font></Button>
+                  <Button fx:id="button8" focusTraversable="false" layoutX="105.0" layoutY="210.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0">
+                     <font>
+                        <Font name="Ebrima" size="46.0" />
+                     </font></Button>
+               </children></Pane>
+            <Button focusTraversable="false" layoutX="163.0" layoutY="458.0" mnemonicParsing="false" onAction="#restartGame" text="Restart" />
+            <Text fx:id="winnerText" layoutX="38.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tic-Tac-Toe" wrappingWidth="301.82421875">
+               <font>
+                  <Font size="57.0" />
+               </font>
+            </Text>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Pane>
+   </children>
+</AnchorPane>
