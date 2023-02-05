@@ -2,6 +2,7 @@ package com.example.ttt;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Labeled;
 import javafx.scene.text.Text;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,12 +42,14 @@ public class TTTController {
 
     @FXML
 
-    private String currentPlayer="X";
+    private String currentPlayer = "X";
+
+    private String color = "#3FF300";
 
     ArrayList<Button> buttons;
 
     public void initialize() {
-        buttons = new ArrayList<>(Arrays.asList(button1,button2,button3,button4,button5,button6,button7,button8,button9));
+        buttons = new ArrayList<>(Arrays.asList(button1, button2, button3, button4, button5, button6, button7, button8, button9));
 
         buttons.forEach(button -> {
             button.setOnAction(event -> handleButtonClick(button));
@@ -54,24 +57,30 @@ public class TTTController {
     }
 
     private void changePlayerTurn() {
-        currentPlayer=currentPlayer.equals("X") ? "O" : "X";
+        currentPlayer = currentPlayer.equals("X") ? "O" : "X";
     }
 
     public void handleButtonClick(Button button) {
         button.setText(currentPlayer);
         button.setDisable(true);
         changePlayerTurn();
+        isDraw();
         isGameOver();
     }
 
-    public void restartGame(){
+    public void restartGame() {
         buttons.forEach(this::resetButton);
     }
 
-    public void resetButton(Button button){
+    public void resetButton(Button button) {
         button.setDisable(false);
         button.setText("");
+        button.setStyle("white");
         winnerText.setText("Tic-Tac-Toe");
+    }
+
+    public void disableButtons(){
+        buttons.forEach(button -> button.setDisable(true));
     }
 
     public void isGameOver() {
@@ -91,14 +100,73 @@ public class TTTController {
             //X winner
             if (line.equals("XXX")) {
                 winnerText.setText("X won!");
+                drawWinningLine(a);
+                disableButtons();
             }
 
             //O winner
             else if (line.equals("OOO")) {
                 winnerText.setText("O won!");
+                drawWinningLine(a);
+                disableButtons();
+            }
+        }
+    }
+
+    public void drawWinningLine(Integer a) {
+        switch (a) {
+            case 0 ->{
+                button1.setStyle("-fx-background-color: "+color);
+                button2.setStyle("-fx-background-color: "+color);
+                button3.setStyle("-fx-background-color: "+color);
+            }
+            case 1 -> {
+                button4.setStyle("-fx-background-color: "+color);
+                button5.setStyle("-fx-background-color: "+color);
+                button6.setStyle("-fx-background-color: "+color);
+            }
+            case 2 -> {
+                button7.setStyle("-fx-background-color: "+color);
+                button8.setStyle("-fx-background-color: "+color);
+                button9.setStyle("-fx-background-color: "+color);
+            }
+            case 3 -> {
+                button1.setStyle("-fx-background-color: "+color);
+                button5.setStyle("-fx-background-color: "+color);
+                button9.setStyle("-fx-background-color: "+color);
+            }
+            case 4 -> {
+                button3.setStyle("-fx-background-color: "+color);
+                button5.setStyle("-fx-background-color: "+color);
+                button7.setStyle("-fx-background-color: "+color);
+            }
+            case 5 -> {
+                button1.setStyle("-fx-background-color: "+color);
+                button4.setStyle("-fx-background-color: "+color);
+                button7.setStyle("-fx-background-color: "+color);
+            }
+            case 6 -> {
+                button2.setStyle("-fx-background-color: "+color);
+                button5.setStyle("-fx-background-color: "+color);
+                button8.setStyle("-fx-background-color: "+color);
+            }
+            case 7 -> {
+                button3.setStyle("-fx-background-color: "+color);
+                button6.setStyle("-fx-background-color: "+color);
+                button9.setStyle("-fx-background-color: "+color);
             }
         }
     }
 
 
+    public void isDraw() {
+        int count = 0;
+        for (Button button : buttons) {
+            count += button.getText().length();
+        }
+        if (count == 9) {
+            winnerText.setText("Draw :(");
+        }
+
+    }
 }
