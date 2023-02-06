@@ -2,13 +2,23 @@ package com.example.ttt;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Labeled;
 import javafx.scene.text.Text;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.io.IOException;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 
 public class TTTController {
+
+
 
     @FXML
     private Button button1;
@@ -46,6 +56,12 @@ public class TTTController {
 
     private String color = "#3FF300";
 
+    private String audioButtonClick = "src/main/resources/assets/clickButton.wav";
+
+    private String audioWinner = "src/main/resources/assets/winnerSound.wav";
+
+    private String audioLose = "src/main/resources/assets/loseSound.wav";
+
     ArrayList<Button> buttons;
 
     public void initialize() {
@@ -62,6 +78,7 @@ public class TTTController {
 
     public void handleButtonClick(Button button) {
         button.setText(currentPlayer);
+        runAudio(audioButtonClick);
         button.setDisable(true);
         changePlayerTurn();
         isDraw();
@@ -100,6 +117,7 @@ public class TTTController {
             //X winner
             if (line.equals("XXX")) {
                 winnerText.setText("X won!");
+                runAudio(audioWinner);
                 drawWinningLine(a);
                 disableButtons();
             }
@@ -107,6 +125,7 @@ public class TTTController {
             //O winner
             else if (line.equals("OOO")) {
                 winnerText.setText("O won!");
+                runAudio(audioWinner);
                 drawWinningLine(a);
                 disableButtons();
             }
@@ -158,7 +177,6 @@ public class TTTController {
         }
     }
 
-
     public void isDraw() {
         int count = 0;
         for (Button button : buttons) {
@@ -166,7 +184,21 @@ public class TTTController {
         }
         if (count == 9) {
             winnerText.setText("Draw :(");
+            runAudio(audioLose);
         }
+    }
 
+    public void runAudio(String audioPath) {
+        try {
+            File audioFile = new File(audioPath);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+            AudioFormat format = audioStream.getFormat();
+            DataLine.Info info = new DataLine.Info(Clip.class, format);
+            Clip audioClip = (Clip) AudioSystem.getLine(info);
+            audioClip.open(audioStream);
+            audioClip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+            ex.printStackTrace();
+        }
     }
 }
