@@ -81,11 +81,11 @@ public class TTTController {
         runAudio(audioButtonClick);
         button.setDisable(true);
         changePlayerTurn();
-        isDraw();
         isGameOver();
     }
 
     public void restartGame() {
+        currentPlayer = "X";
         buttons.forEach(this::resetButton);
     }
 
@@ -120,14 +120,19 @@ public class TTTController {
                 runAudio(audioWinner);
                 drawWinningLine(a);
                 disableButtons();
+                break;
             }
-
             //O winner
             else if (line.equals("OOO")) {
                 winnerText.setText("O won!");
                 runAudio(audioWinner);
                 drawWinningLine(a);
                 disableButtons();
+                break;
+            }
+            else if (isDraw()){
+                winnerText.setText("Draw :(");
+                runAudio(audioLose);
             }
         }
     }
@@ -177,16 +182,14 @@ public class TTTController {
         }
     }
 
-    public void isDraw() {
+    public boolean isDraw() {
         int count = 0;
         for (Button button : buttons) {
             count += button.getText().length();
         }
-        if (count == 9) {
-            winnerText.setText("Draw :(");
-            runAudio(audioLose);
-        }
+        return count == 9;
     }
+
 
     public void runAudio(String audioPath) {
         try {
